@@ -29,9 +29,8 @@ const ActiveTimersView: React.FC<ActiveTimersViewProps> = () => {
   const [timers, setTimers] = useState<Timer[]>([]);
 
   const addTimer = useCallback(() => {
-    const now = DateTime.utc();
     setTimers((timers) => [...timers, createTimer(now)]);
-  }, []);
+  }, [now]);
 
   const updateTimer = useCallback((timer: Timer) => {
     setTimers((timers) => {
