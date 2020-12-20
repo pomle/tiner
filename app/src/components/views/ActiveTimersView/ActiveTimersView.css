@@ -3,10 +3,14 @@
   flex-flow: column;
 }
 
+.ActiveTimersView .add {
+  display: flex;
+}
+
 .ActiveTimersView .add button {
   background: #381c38;
-  color: #fff;
+  color: rgb(221, 199, 199);
+  flex: 1;
   font-size: 48px;
   padding: 8px;
-  width: 100%;
 }
