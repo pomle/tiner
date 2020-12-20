@@ -63,7 +63,9 @@ const TimerComp: React.FC<TimerProps> = ({ now, timer, onChange }) => {
   return (
     <div className={classNames.join(" ")}>
       <div className="time">
-        <button onClick={toggle}>{elapsed.toFormat("hh:mm:ss")}</button>
+        <button type="button" onClick={toggle}>
+          {elapsed.toFormat("hh:mm:ss")}
+        </button>
       </div>
       <div className="label">
         <button type="button" onClick={changeLabel}>
