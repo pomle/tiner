@@ -12,9 +12,11 @@
 }
 
 .Timer .time {
+  flex: 1;
   font-size: 40px;
 }
 
-.Timer .label button {
+.Timer .label {
+  flex: 0;
   font-size: 40px;
 }
