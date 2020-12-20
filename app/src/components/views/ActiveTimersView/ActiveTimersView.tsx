@@ -8,9 +8,12 @@ import TimerComp from "./components/Timer";
 import { Timer } from "types/Timer";
 import "./ActiveTimersView.css";
 
+let counter = 0;
+
 function createTimer(start: DateTime): Timer {
+  counter += 1;
   return {
-    id: start.toFormat("x"),
+    id: counter.toString(),
     acc: Duration.fromMillis(0),
     start,
     running: true,
