@@ -30,37 +30,34 @@ const SwipeItem: React.FC<SwipeItemProps> = ({ onSwipeAway, children }) => {
       const offsetX = event.clientX - grab.current.clientX;
       setOffsetX(offsetX);
 
-      const events = history.current.slice(-1);
-      speed.current = events[0].movementX;
+      const events = history.current.slice(-2);
+      speed.current = events[1].clientX - events[0].clientX;
     },
     []
   );
 
-  const handleUp = useCallback(
-    (event: React.PointerEvent<HTMLDivElement>) => {
-      if (Math.abs(speed.current) > 10) {
-        const deltaX = speed.current;
-        let done = false;
-        const move = () => {
-          setOffsetX((offsetX) => {
-            if (Math.abs(offsetX) > 600) {
-              done = true;
-            }
-            return offsetX + deltaX;
-          });
-          if (done) {
-            onSwipeAway();
-          } else {
-            requestAnimationFrame(move);
+  const handleUp = useCallback(() => {
+    if (Math.abs(speed.current) > 10) {
+      const deltaX = speed.current;
+      let done = false;
+      const move = () => {
+        setOffsetX((offsetX) => {
+          if (Math.abs(offsetX) > 600) {
+            done = true;
           }
-        };
-        requestAnimationFrame(move);
-      } else {
-        setOffsetX(0);
-      }
-    },
-    [onSwipeAway]
-  );
+          return offsetX + deltaX;
+        });
+        if (done) {
+          onSwipeAway();
+        } else {
+          requestAnimationFrame(move);
+        }
+      };
+      requestAnimationFrame(move);
+    } else {
+      setOffsetX(0);
+    }
+  }, [onSwipeAway]);
 
   const style = {
     transform: `translateX(${offsetX}px)`,
