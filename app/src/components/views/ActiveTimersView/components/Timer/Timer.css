@@ -5,7 +5,6 @@
   font-size: 48px;
   justify-content: space-between;
   padding: 16px;
-  touch-action: pan-y;
 }
 
 .Timer.paused {
