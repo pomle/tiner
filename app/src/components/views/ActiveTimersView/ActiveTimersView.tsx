@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { DateTime, Duration } from "luxon";
 import * as emoji from "lib/emoji";
 import { useLiveTime } from "components/hooks/useLiveTime";
@@ -8,6 +8,7 @@ import "./ActiveTimersView.css";
 
 function createTimer(start: DateTime): Timer {
   return {
+    id: start.toFormat("x"),
     acc: Duration.fromMillis(0),
     start,
     running: true,
@@ -41,7 +42,7 @@ const ActiveTimersView: React.FC<ActiveTimersViewProps> = ({}) => {
             );
           };
           return (
-            <div className="timer">
+            <div key={timer.id} className="timer">
               <TimerComp now={now} timer={timer} onChange={handleChange} />
             </div>
           );

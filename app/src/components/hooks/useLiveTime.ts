@@ -22,7 +22,7 @@ type Unit =
   | "milliseconds";
 
 function now() {
-  return DateTime.local();
+  return DateTime.utc();
 }
 
 export const useLiveTime = (unit: Unit): DateTime => {
@@ -31,9 +31,16 @@ export const useLiveTime = (unit: Unit): DateTime => {
   const [time, setTime] = useState<DateTime>(initial);
 
   useEffect(() => {
-    const nextTime = time.startOf(unit).plus({ [unit]: 1 });
-    const delay = nextTime.diff(time).milliseconds;
-    const timer = setTimeout(setTime, delay, nextTime);
+    const delay = time
+      .startOf(unit)
+      .plus({ [unit]: 1 })
+      .diff(time).milliseconds;
+    const timer = setTimeout(() => {
+      const now = DateTime.utc()
+        .startOf(unit)
+        .plus({ [unit]: 1 });
+      setTime(now);
+    }, delay);
     return () => clearTimeout(timer);
   }, [unit, time]);
 
