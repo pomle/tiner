@@ -44,14 +44,14 @@ const TimerComp: React.FC<TimerProps> = ({ now, timer, onChange }) => {
     } else {
       onChange(resume(timer));
     }
-  }, [now, timer]);
+  }, [timer, onChange, pause, resume]);
 
   const changeLabel = useCallback(() => {
     onChange({
       ...timer,
       label: emoji.random(),
     });
-  }, [onChange]);
+  }, [timer, onChange]);
 
   const classNames = ["Timer"];
   if (timer.running) {
