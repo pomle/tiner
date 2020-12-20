@@ -1,7 +1,17 @@
 .Timer {
   align-items: center;
+  color: #fff;
   display: flex;
   justify-content: space-between;
+  padding: 16px;
+  touch-action: pan-y;
+}
+
+.Timer.paused {
+  color: #505050;
+}
+
+.Timer .time {
   font-size: 40px;
 }
 

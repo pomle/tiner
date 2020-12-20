@@ -10,6 +10,7 @@ function createTimer(start: DateTime): Timer {
   return {
     acc: Duration.fromMillis(0),
     start,
+    running: true,
     label: emoji.random(),
   };
 }

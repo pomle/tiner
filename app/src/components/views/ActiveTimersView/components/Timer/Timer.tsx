@@ -1,31 +1,72 @@
 import React, { useCallback } from "react";
 import { DateTime } from "luxon";
 import * as emoji from "lib/emoji";
-import { Timer as T } from "types/Timer";
+import { Timer } from "types/Timer";
 
 import "./Timer.css";
 
 interface TimerProps {
   now: DateTime;
-  timer: T;
-  onChange: (timer: T) => void;
+  timer: Timer;
+  onChange: (timer: Timer) => void;
 }
 
-const Timer: React.FC<TimerProps> = ({ now, timer, onChange }) => {
-  const elapsed = now.diff(timer.start);
+const TimerComp: React.FC<TimerProps> = ({ now, timer, onChange }) => {
+  const elapsed = timer.running
+    ? now.diff(timer.start).plus(timer.acc)
+    : timer.acc;
 
-  const handleLabel = useCallback(() => {
+  const pause = useCallback(
+    (timer: Timer) => {
+      return {
+        ...timer,
+        acc: elapsed,
+        running: false,
+      };
+    },
+    [elapsed]
+  );
+
+  const resume = useCallback(
+    (timer: Timer) => {
+      return {
+        ...timer,
+        start: now,
+        running: true,
+      };
+    },
+    [now]
+  );
+
+  const toggle = useCallback(() => {
+    if (timer.running) {
+      onChange(pause(timer));
+    } else {
+      onChange(resume(timer));
+    }
+  }, [now, timer]);
+
+  const changeLabel = useCallback(() => {
     onChange({
       ...timer,
       label: emoji.random(),
     });
   }, [onChange]);
 
+  const classNames = ["Timer"];
+  if (timer.running) {
+    classNames.push("running");
+  } else {
+    classNames.push("paused");
+  }
+
   return (
-    <div className="Timer">
-      <div className="time">{elapsed.toFormat("hh:mm:ss")}</div>
+    <div className={classNames.join(" ")}>
+      <button className="time" onClick={toggle}>
+        {elapsed.toFormat("hh:mm:ss")}
+      </button>
       <div className="label">
-        <button type="button" onClick={handleLabel}>
+        <button type="button" onClick={changeLabel}>
           {timer.label}
         </button>
       </div>
@@ -33,4 +74,4 @@ const Timer: React.FC<TimerProps> = ({ now, timer, onChange }) => {
   );
 };
 
-export default Timer;
+export default TimerComp;
