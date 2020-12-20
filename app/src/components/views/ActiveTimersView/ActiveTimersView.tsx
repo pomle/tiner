@@ -29,30 +29,34 @@ const ActiveTimersView: React.FC<ActiveTimersViewProps> = () => {
     setTimers((timers) => [...timers, createTimer(now)]);
   }, [now]);
 
+  const updateTimer = useCallback((timer: Timer) => {
+    setTimers((timers) => {
+      return timers.map((t) => {
+        if (t.id === timer.id) {
+          return timer;
+        }
+        return t;
+      });
+    });
+  }, []);
+
+  const removeTimer = useCallback((timer: Timer) => {
+    setTimers((timers) => timers.filter((t) => t.id !== timer.id));
+  }, []);
+
   return (
     <div className="ActiveTimersView">
       <div className="timers">
         <SwipeList>
-          {timers.map((timer, index) => {
-            const handleChange = (timer: Timer) => {
-              setTimers((timers) =>
-                timers.map((t, i) => {
-                  if (index === i) {
-                    return timer;
-                  }
-                  return t;
-                })
-              );
-            };
-
+          {timers.map((timer) => {
             const handleRemove = () => {
-              setTimers((timers) => timers.filter((t) => t.id !== timer.id));
+              removeTimer(timer);
             };
 
             return (
               <SwipeItem key={timer.id} onSwipeAway={handleRemove}>
                 <div className="timer">
-                  <TimerComp now={now} timer={timer} onChange={handleChange} />
+                  <TimerComp now={now} timer={timer} onChange={updateTimer} />
                 </div>
               </SwipeItem>
             );
