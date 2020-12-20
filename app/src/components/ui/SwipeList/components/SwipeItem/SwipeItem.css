@@ -1,0 +1,3 @@
+.SwipeItem {
+  touch-action: pan-x pan-y;
+}
