@@ -1,5 +1,10 @@
 .Timer {
+  align-items: center;
   display: flex;
   justify-content: space-between;
-  font-size: 32px;
+  font-size: 40px;
+}
+
+.Timer .label button {
+  font-size: 40px;
 }

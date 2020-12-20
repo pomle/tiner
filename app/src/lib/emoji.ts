@@ -1,32 +1,8 @@
-export const emoji = [
-  "🍔",
-  "🥔",
-  "🥕",
-  "🌽",
-  "🥬",
-  "🥦",
-  "🧄",
-  "🧅",
-  "🍞",
-  "🥐",
-  "🥖",
-  "🧇",
-  "🍗",
-  "🥩",
-  "🥓",
-  "🍕",
-  "🌮",
-  "🥚",
-  "🍳",
-  "🥘",
-  "🍲",
-  "🍚",
-  "🍜",
-  "🍤",
-  "🥠",
-];
+export const emoji = ["🥔", "🥦", "🍞", "🍗", "🥩", "🥚", "🍚"];
+
+let count = 0;
 
 export function random() {
-  const index = Math.floor(Math.random() * emoji.length);
+  const index = count++ % emoji.length;
   return emoji[index];
 }
