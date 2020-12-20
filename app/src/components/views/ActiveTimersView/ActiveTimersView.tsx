@@ -3,7 +3,7 @@ import { DateTime, Duration } from "luxon";
 import * as emoji from "lib/emoji";
 import { useLiveTime } from "components/hooks/useLiveTime";
 import TimerComp from "./components/Timer";
-import { Timer } from "types/types";
+import { Timer } from "types/Timer";
 import "./ActiveTimersView.css";
 
 function createTimer(start: DateTime): Timer {

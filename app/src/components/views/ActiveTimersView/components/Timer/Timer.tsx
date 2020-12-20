@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { DateTime } from "luxon";
 import * as emoji from "lib/emoji";
-import { Timer as T } from "types/types";
+import { Timer as T } from "types/Timer";
 
 import "./Timer.css";
 
