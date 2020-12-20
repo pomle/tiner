@@ -20,7 +20,7 @@ function createTimer(start: DateTime): Timer {
 
 interface ActiveTimersViewProps {}
 
-const ActiveTimersView: React.FC<ActiveTimersViewProps> = ({}) => {
+const ActiveTimersView: React.FC<ActiveTimersViewProps> = () => {
   const now = useLiveTime("second");
 
   const [timers, setTimers] = useState<Timer[]>([]);
