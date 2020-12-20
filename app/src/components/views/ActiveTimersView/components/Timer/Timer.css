@@ -2,6 +2,7 @@
   align-items: center;
   color: #fff;
   display: flex;
+  font-size: 48px;
   justify-content: space-between;
   padding: 16px;
   touch-action: pan-y;
@@ -13,10 +14,8 @@
 
 .Timer .time {
   flex: 1;
-  font-size: 40px;
 }
 
 .Timer .label {
   flex: 0;
-  font-size: 40px;
 }
