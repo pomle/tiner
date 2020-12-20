@@ -14,3 +14,16 @@
   font-size: 48px;
   padding: 8px;
 }
+
+.ActiveTimersView .instructions {
+  color: #454545;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 24px;
+  text-transform: uppercase;
+}
+
+.ActiveTimersView .instructions ul {
+  list-style-type: none;
+  line-height: 1.4;
+}

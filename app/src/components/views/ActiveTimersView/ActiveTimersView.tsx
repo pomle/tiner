@@ -64,6 +64,13 @@ const ActiveTimersView: React.FC<ActiveTimersViewProps> = ({}) => {
           +
         </button>
       </div>
+      <div className="instructions">
+        <ul>
+          <li>Plus to add</li>
+          <li>Tap to pause</li>
+          <li>Swipe to remove</li>
+        </ul>
+      </div>
     </div>
   );
 };
