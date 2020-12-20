@@ -23,5 +23,6 @@ button {
   color: inherit;
   font-size: inherit;
   outline: none;
-  -webkit-appearance: none;
+  margin: 0;
+  padding: 0;
 }
