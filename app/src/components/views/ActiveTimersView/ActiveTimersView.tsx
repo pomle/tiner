@@ -1,6 +1,4 @@
 import React, { useCallback } from "react";
-import { DateTime, Duration } from "luxon";
-import * as emoji from "lib/emoji";
 import { useLiveTime } from "components/hooks/useLiveTime";
 import SwipeList from "components/ui/SwipeList";
 import SwipeItem from "components/ui/SwipeList/components/SwipeItem";
@@ -8,20 +6,8 @@ import TimerComp from "./components/Timer";
 import { Timer } from "types/Timer";
 import { usePersistedState } from "components/hooks/usePersistedState";
 import { serialize, unserialize } from "./persist";
+import { createTimer } from "./timer";
 import "./ActiveTimersView.css";
-
-let counter = 0;
-
-function createTimer(start: DateTime): Timer {
-  counter += 1;
-  return {
-    id: counter.toString(),
-    acc: Duration.fromMillis(0),
-    start,
-    running: true,
-    label: emoji.random(),
-  };
-}
 
 interface ActiveTimersViewProps {}
 
