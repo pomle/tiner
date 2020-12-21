@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { DateTime, Duration } from "luxon";
 import * as emoji from "lib/emoji";
 import { useLiveTime } from "components/hooks/useLiveTime";
@@ -6,6 +6,8 @@ import SwipeList from "components/ui/SwipeList";
 import SwipeItem from "components/ui/SwipeList/components/SwipeItem";
 import TimerComp from "./components/Timer";
 import { Timer } from "types/Timer";
+import { usePersistedState } from "components/hooks/usePersistedState";
+import { serialize, unserialize } from "./persist";
 import "./ActiveTimersView.css";
 
 let counter = 0;
@@ -26,26 +28,37 @@ interface ActiveTimersViewProps {}
 const ActiveTimersView: React.FC<ActiveTimersViewProps> = () => {
   const now = useLiveTime("second");
 
-  const [timers, setTimers] = useState<Timer[]>([]);
+  const [timers, setTimers] = usePersistedState<Timer[]>(
+    "timers",
+    serialize,
+    unserialize,
+    []
+  );
 
   const addTimer = useCallback(() => {
     setTimers((timers) => [...timers, createTimer(now)]);
-  }, [now]);
+  }, [now, setTimers]);
 
-  const updateTimer = useCallback((timer: Timer) => {
-    setTimers((timers) => {
-      return timers.map((t) => {
-        if (t.id === timer.id) {
-          return timer;
-        }
-        return t;
+  const updateTimer = useCallback(
+    (timer: Timer) => {
+      setTimers((timers) => {
+        return timers.map((t) => {
+          if (t.id === timer.id) {
+            return timer;
+          }
+          return t;
+        });
       });
-    });
-  }, []);
+    },
+    [setTimers]
+  );
 
-  const removeTimer = useCallback((timer: Timer) => {
-    setTimers((timers) => timers.filter((t) => t.id !== timer.id));
-  }, []);
+  const removeTimer = useCallback(
+    (timer: Timer) => {
+      setTimers((timers) => timers.filter((t) => t.id !== timer.id));
+    },
+    [setTimers]
+  );
 
   return (
     <div className="ActiveTimersView">
