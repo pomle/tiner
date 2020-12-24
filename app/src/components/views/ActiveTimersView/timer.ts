@@ -4,7 +4,7 @@ import * as emoji from "lib/emoji";
 
 export function createTimer(start: DateTime): Timer {
   return {
-    id: start.toFormat("x"),
+    id: DateTime.utc().toFormat("x"),
     acc: Duration.fromMillis(0),
     start,
     running: true,
