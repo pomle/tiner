@@ -1,0 +1,5 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target" : { "namespace": "android_app", "package_name": "app.tiner.twa",
+                   "sha256_cert_fingerprints": ["19:A3:58:25:31:B3:C4:F5:86:E2:5D:91:B6:FF:95:29:6A:E2:CF:BD:6F:56:D5:88:5D:AA:8A:D5:0B:4E:AD:A2"] }
+    }]
